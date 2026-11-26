@@ -5,236 +5,256 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>진로희망 조사</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script src="config.js"></script>
 <style>
   :root{
-    --bg:#f6f7fb; --card:#fff; --ink:#1f2633; --sub:#5b6475; --line:#e3e6ee;
-    --main:#2f6fec; --main-soft:#e8f0fe; --ok:#1e9e6a; --ok-soft:#e3f6ee;
-    --warn:#d9822b; --warn-soft:#fdf1e4; --bad:#d64545; --bad-soft:#fde8e8;
+    --paper:#FBFCFA; --ink:#17233D; --soft:#5E6678; --faint:#9CA3B0; --rule:#DCE1E8;
+    --mark:#FFE45C; --leaf:#2E7D5B; --alert:#C2412D; --focus:#3B6FE0;
   }
   *{box-sizing:border-box}
   html{font-size:20px}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;line-height:1.55}
-  header{background:var(--main);color:#fff;padding:18px 20px}
-  header h1{margin:0;font-size:1.45rem}
-  header .who{font-size:1rem;opacity:.95;margin-top:4px}
-  main{max-width:960px;margin:0 auto;padding:18px 14px 40px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
-  h2{font-size:1.25rem;margin:0 0 12px}
-  h3{font-size:1.08rem;margin:16px 0 8px}
-  label{display:block;font-weight:700;margin:12px 0 6px}
-  input[type=text],input[type=password],textarea,select{
-    width:100%;font-size:1.15rem;padding:14px 16px;border:2px solid var(--line);border-radius:14px;
-    background:#fff;color:var(--ink);font-family:inherit}
-  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--main)}
-  textarea{min-height:110px;resize:vertical}
-  button{font-family:inherit;font-size:1.05rem;font-weight:700;border:none;border-radius:14px;
-    padding:14px 20px;min-height:56px;cursor:pointer;background:var(--main-soft);color:var(--main)}
-  button.primary{background:var(--main);color:#fff}
-  button.ok{background:var(--ok);color:#fff}
-  button.ghost{background:transparent;color:var(--sub);border:2px solid var(--line)}
-  button.small{font-size:.9rem;min-height:44px;padding:8px 14px}
-  button:disabled{opacity:.45;cursor:not-allowed}
-  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .grow{flex:1}
-  .muted{color:var(--sub)}
-  .center{text-align:center}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    line-height:1.6;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;word-break:keep-all}
   .hidden{display:none!important}
-  .msg{padding:12px 16px;border-radius:12px;margin:10px 0;font-size:1rem}
-  .msg.err{background:var(--bad-soft);color:var(--bad)}
-  .msg.info{background:var(--main-soft);color:#1d4fb8}
-  .msg.okm{background:var(--ok-soft);color:#14724b}
+  header,main,footer{max-width:760px;margin:0 auto;padding-left:24px;padding-right:24px}
+  header{padding-top:44px;padding-bottom:6px}
+  header .who{font-size:1rem;color:var(--soft);font-weight:600;min-height:1.6em}
+  header h1{margin:2px 0 0;font-size:2.3rem;font-weight:800;letter-spacing:-0.045em;line-height:1.2}
+  main{padding-bottom:40px}
+  .card{margin:40px 0 72px}
+  h2{font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;margin:0 0 6px}
+  h3{font-size:1.05rem;font-weight:700;margin:34px 0 10px}
+  p{margin:0 0 14px}
+  .muted{color:var(--soft)}
+  .lead{font-size:1.1rem;color:var(--soft);max-width:34em}
 
-  /* 고른 직업 칸 */
-  .slots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media (max-width:640px){.slots{grid-template-columns:1fr}}
-  .slot{border:3px dashed var(--line);border-radius:16px;padding:14px 16px;min-height:96px}
-  .slot.filled{border-style:solid;border-color:var(--main);background:var(--main-soft)}
-  .slot .tag{font-size:.85rem;font-weight:800;color:var(--main)}
-  .slot .nm{font-size:1.35rem;font-weight:800;margin:2px 0}
-  .slot .gp{font-size:.9rem;color:var(--sub)}
+  /* 입력: 밑줄만 */
+  label{display:block;font-size:.95rem;font-weight:700;color:var(--soft);margin:28px 0 2px}
+  input[type=text],input[type=password],select{
+    width:100%;font:inherit;font-size:1.5rem;font-weight:600;color:var(--ink);
+    padding:8px 2px;border:none;border-bottom:3px solid var(--ink);border-radius:0;background:transparent;appearance:none}
+  input::placeholder,textarea::placeholder{color:var(--faint);font-weight:400}
+  select{font-size:1.2rem;cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);
+    background-position:calc(100% - 16px) 55%,calc(100% - 9px) 55%;background-size:7px 7px;background-repeat:no-repeat}
+  input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--focus)}
+  /* 까닭 칸: 공책 줄 */
+  textarea{width:100%;font:inherit;font-size:1.15rem;color:var(--ink);border:none;border-radius:0;resize:vertical;
+    min-height:calc(1.9rem * 3 + 6px);padding:2px 2px;line-height:1.9rem;background-color:transparent;
+    background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(1.9rem - 1px),var(--rule) calc(1.9rem - 1px),var(--rule) 1.9rem);
+    background-attachment:local}
 
-  /* 관심 분야 칩 */
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{font-size:1rem;min-height:48px;padding:8px 14px;border-radius:999px;background:#fff;border:2px solid var(--line);color:var(--ink);font-weight:600}
-  .chip.on{border-color:var(--main);background:var(--main-soft);color:var(--main)}
+  /* 버튼: 글자와 형광펜 */
+  button{font:inherit;font-weight:700;color:var(--ink);background:none;border:none;border-radius:0;cursor:pointer;
+    padding:10px 4px;min-height:48px;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+  button:hover{text-decoration-color:var(--focus)}
+  button.primary,button.ok{font-size:1.35rem;font-weight:800;text-decoration:none;padding:8px 8px;
+    background:linear-gradient(transparent 52%,var(--mark) 52%,var(--mark) 92%,transparent 92%)}
+  button.ok{font-size:1.6rem}
+  button.primary:hover,button.ok:hover{background:linear-gradient(transparent 30%,var(--mark) 30%,var(--mark) 92%,transparent 92%)}
+  button.ghost{color:var(--soft);font-weight:600;text-decoration-thickness:1px}
+  button.small{font-size:.95rem;min-height:44px}
+  button:disabled{color:var(--faint);cursor:not-allowed;background:none;text-decoration:none}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  .row{display:flex;gap:6px 26px;flex-wrap:wrap;align-items:center}
 
-  /* 직업 카드 */
-  .jobs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-  @media (max-width:640px){.jobs{grid-template-columns:1fr}}
-  .job{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;text-align:left;
-    display:flex;flex-direction:column;gap:6px;font-weight:400;color:var(--ink);min-height:0}
-  .job:hover{border-color:var(--main)}
-  .job .nm{font-size:1.2rem;font-weight:800}
-  .job .gp{display:inline-block;font-size:.8rem;background:#f0f2f7;color:var(--sub);border-radius:999px;padding:2px 10px;align-self:flex-start}
-  .job .wk{font-size:.95rem;color:var(--sub);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .job .seen{font-size:.8rem;color:var(--ok);font-weight:700}
-  .job.picked{border-color:var(--ok);background:var(--ok-soft)}
+  .msg{margin:12px 0 0;font-size:1rem;font-weight:600}
+  .msg.err{color:var(--alert)} .msg.info{color:var(--soft)} .msg.okm{color:var(--leaf)}
 
-  /* 없음 */
-  .none-zone{margin-top:28px;padding-top:18px;border-top:1px dashed var(--line);text-align:center}
-  .none-zone button{background:transparent;color:#9aa1ae;font-size:.85rem;font-weight:600;min-height:40px;text-decoration:underline}
-  .none-zone .hint{font-size:.8rem;color:#9aa1ae}
+  /* 고른 직업: 빈칸 채우기 문장 */
+  .sentence{font-size:1.8rem;font-weight:700;line-height:2.05;letter-spacing:-0.035em;margin:18px 0 4px}
+  .blank{display:inline-block;min-width:5em;padding:0 .2em;border-bottom:3px solid var(--ink);text-align:center;line-height:1.25}
+  .blank.filled{border-bottom-color:transparent;font-weight:900;
+    background:linear-gradient(transparent 55%,var(--mark) 55%,var(--mark) 95%,transparent 95%)}
+  .blank.opt:not(.filled){border-bottom-style:dashed;border-bottom-color:var(--faint)}
+  .tools{font-size:.95rem;color:var(--soft)}
+  .tools button{font-size:.95rem;font-weight:600;color:var(--soft);min-height:44px;text-decoration-thickness:1px}
 
-  /* 모달 */
-  .modal{position:fixed;inset:0;background:rgba(20,25,35,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50}
-  @media (min-width:700px){.modal{align-items:center}}
-  .sheet{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:22px 20px 18px}
-  @media (min-width:700px){.sheet{border-radius:22px}}
-  .sheet h2{font-size:1.5rem}
-  .sheet .gp{display:inline-block;font-size:.9rem;background:var(--main-soft);color:var(--main);border-radius:999px;padding:3px 12px;font-weight:700}
-  .sheet ul{margin:6px 0;padding-left:22px}
-  .sheet li{margin:4px 0}
-  .sheet .sec{background:#f8f9fc;border-radius:14px;padding:12px 16px;margin:10px 0}
-  .sheet .sec b{display:block;margin-bottom:4px}
-  .sheet .actions{position:sticky;bottom:-18px;background:#fff;padding:12px 0 4px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:14px}
-  .sheet .actions button{flex:1;min-width:140px}
-  .link{display:inline-block;margin-top:8px;font-weight:700;color:var(--main);font-size:1.05rem}
+  /* 좋아하는 것: 낱말 */
+  .chips{display:flex;flex-wrap:wrap;gap:2px 20px;margin-top:4px}
+  .chip{font-size:1.25rem;font-weight:600;color:var(--soft);text-decoration:none;padding:4px 4px;min-height:44px}
+  .chip:hover{color:var(--ink);text-decoration:underline;text-decoration-thickness:2px}
+  .chip.on{color:var(--ink);font-weight:800;background:linear-gradient(transparent 55%,var(--mark) 55%,var(--mark) 92%,transparent 92%)}
+
+  /* 직업 목록: 사전 항목 */
+  .search{display:flex;gap:16px;align-items:flex-end;margin-top:20px}
+  .search input{flex:1;min-width:0}
+  #resInfo{margin-top:34px;font-size:1rem;color:var(--soft)}
+  .jobs{margin-top:6px}
+  .job{display:block;width:100%;text-align:left;font-weight:400;padding:18px 0 16px;text-decoration:none;color:var(--ink)}
+  .job + .job{border-top:1px solid var(--rule)}
+  .job .nm{font-size:1.35rem;font-weight:800;letter-spacing:-0.03em}
+  .job .gp{font-size:.9rem;color:var(--soft);margin-left:10px}
+  .job .seen{font-size:.85rem;font-weight:700;color:var(--leaf);margin-left:10px}
+  .job .wk{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px;font-size:1rem;color:var(--soft);max-width:36em}
+  .job:hover .nm{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+  .job.picked .nm{background:linear-gradient(transparent 55%,var(--mark) 55%,var(--mark) 95%,transparent 95%)}
+  #btnMore{margin-top:10px}
+
+  .none-zone{margin-top:64px;text-align:center}
+  .none-zone button{font-size:.85rem;font-weight:500;color:var(--faint);text-decoration-thickness:1px}
+  .none-zone .hint{font-size:.8rem;color:var(--faint)}
+
+  /* 직업 설명: 한 장 전체 */
+  .modal{position:fixed;inset:0;background:var(--paper);overflow:auto;z-index:50;animation:open .18s ease-out}
+  @keyframes open{from{transform:translateY(16px)}}
+  .sheet{max-width:720px;margin:0 auto;padding:30px 24px 140px}
+  .sheet h2{font-size:2.2rem;letter-spacing:-0.045em;margin:6px 0 2px}
+  .sheet .gp{font-size:1rem;color:var(--soft);font-weight:600}
+  .sheet .close{float:right;color:var(--soft);font-weight:600}
+  .sec{margin:28px 0 0;max-width:34em}
+  .sec b{display:block;font-size:.95rem;color:var(--soft);font-weight:700;margin-bottom:4px}
+  .sec ul{margin:0;padding-left:1.1em}
+  .sec li{margin:3px 0}
+  .link{display:inline-block;margin-top:30px;font-weight:700;color:var(--ink);text-decoration-thickness:2px;text-underline-offset:6px}
+  .actions{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--rule);
+    display:flex;justify-content:center;flex-wrap:wrap;gap:4px 34px;padding:10px 24px calc(10px + env(safe-area-inset-bottom))}
+  .note{margin-top:28px;color:var(--soft)}
+  details summary{cursor:pointer;color:var(--faint);font-size:.9rem;margin-top:40px}
+  .check{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:1.05rem}
+  .check input{width:26px;height:26px;flex:none;margin-top:3px;accent-color:var(--ink)}
 
   /* 교사 */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
-  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
-  .stat b{display:block;font-size:1.6rem}
-  table{width:100%;border-collapse:collapse;font-size:.92rem;background:#fff}
-  th,td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
-  th{background:#f3f5fa;position:sticky;top:0;white-space:nowrap}
-  td{white-space:nowrap} td.wrap{white-space:normal;min-width:180px}
-  .tw{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:12px}
-  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:700;font-size:.85rem}
-  .b-ok{background:var(--ok-soft);color:var(--ok)} .b-none{background:var(--warn-soft);color:var(--warn)} .b-no{background:var(--bad-soft);color:var(--bad)}
-  footer{font-size:.72rem;color:#8a92a3;text-align:center;padding:10px 14px 28px;line-height:1.6}
-  .spin{display:inline-block;width:18px;height:18px;border:3px solid #c9d6f5;border-top-color:var(--main);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px;margin-right:6px}
+  .tally{font-size:1.45rem;font-weight:700;letter-spacing:-0.03em;line-height:1.7;margin:14px 0 6px}
+  .tally b{font-size:2.3rem;font-weight:900;letter-spacing:-0.05em}
+  .tally .n-ok{color:var(--leaf)} .tally .n-none{color:#B8741A} .tally .n-no{color:var(--alert)}
+  .filters{display:flex;gap:4px 22px;flex-wrap:wrap;margin:6px 0 4px}
+  .tw{overflow:auto;max-height:72vh;margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
+  th{text-align:left;font-size:.82rem;color:var(--soft);font-weight:700;padding:8px 10px 8px 0;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);white-space:nowrap}
+  td{padding:12px 10px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;white-space:nowrap}
+  td.wrap{white-space:normal;min-width:200px}
+  td .sub{display:block;font-size:.78rem;color:var(--soft)}
+  .badge{font-weight:800}
+  .b-ok{color:var(--leaf)} .b-none{color:#B8741A} .b-no{color:var(--alert)}
+
+  body.wide header,body.wide main,body.wide footer{max-width:1180px}
+  td button{white-space:nowrap}
+  footer{font-size:.72rem;color:var(--faint);padding-top:20px;padding-bottom:36px;line-height:1.7}
+  .spin{display:inline-block;width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--ink);border-radius:50%;animation:sp .9s linear infinite;vertical-align:-2px;margin-right:8px}
   @keyframes sp{to{transform:rotate(360deg)}}
+  @media (max-width:560px){
+    html{font-size:18px}
+    header h1{font-size:1.95rem}
+    .sentence{font-size:1.5rem}
+    .blank{min-width:4em}
+  }
+  @media (prefers-reduced-motion:reduce){.modal{animation:none}.spin{animation-duration:3s}}
 </style>
 </head>
 <body>
 <header>
-  <h1 id="hTitle">나의 진로희망 조사</h1>
   <div class="who" id="hWho"></div>
+  <h1 id="hTitle">나의 진로희망 조사</h1>
 </header>
 
 <main>
-  <!-- ① 입장 -->
+  <!-- 입장 -->
   <section id="scrLogin">
     <div class="card">
-      <h2>입장하기</h2>
-      <p class="muted" style="margin-top:0">학번과 이름을 넣고 입장하세요. 커리어넷 직업백과에 있는 직업 중에서 나의 희망 직업을 골라요.</p>
-      <label for="inSid">학번 (5자리)</label>
-      <input id="inSid" type="text" inputmode="numeric" maxlength="5" placeholder="예: 10601" autocomplete="off">
+      <p class="lead">커리어넷 직업백과에 있는 직업 가운데에서 내가 되고 싶은 직업을 골라요. 먼저 학번과 이름을 적어 주세요.</p>
+      <label for="inSid">학번</label>
+      <input id="inSid" type="text" inputmode="numeric" maxlength="5" placeholder="10601" autocomplete="off">
       <label for="inName">이름</label>
       <input id="inName" type="text" maxlength="20" placeholder="이름" autocomplete="off">
       <div id="loginMsg"></div>
-      <div class="row" style="margin-top:16px"><button class="primary grow" id="btnEnter">입장하기</button></div>
+      <div class="row" style="margin-top:30px"><button class="primary" id="btnEnter">시작하기</button></div>
     </div>
-    <div class="center"><button class="ghost small" id="btnTeacher">선생님 모드</button></div>
+    <button class="ghost small" id="btnTeacher">선생님 모드</button>
   </section>
 
-  <!-- ② 학생 고르기 -->
+  <!-- 고르기 -->
   <section id="scrPick" class="hidden">
     <div class="card">
-      <h2>내가 고른 희망 직업</h2>
-      <div class="slots">
-        <div class="slot" id="slot1"></div>
-        <div class="slot" id="slot2"></div>
-      </div>
-      <label for="inReason">이 직업을 고른 까닭 <span class="muted" style="font-weight:400">(선택, 300자까지)</span></label>
-      <textarea id="inReason" maxlength="300" placeholder="예: 동물을 돌보는 것을 좋아하고, 아픈 동물을 치료해 주고 싶어서"></textarea>
+      <p class="sentence">내가 가장 되고 싶은 직업은 <span class="blank" id="slot1"></span>,<br>그다음으로는 <span class="blank opt" id="slot2"></span>.</p>
+      <div class="tools" id="slotTools"></div>
+      <label for="inReason">이 직업을 고른 까닭 (쓰지 않아도 돼요)</label>
+      <textarea id="inReason" maxlength="300" placeholder="동물을 돌보는 일이 좋고, 아픈 동물을 치료해 주고 싶어서"></textarea>
       <div id="pickMsg"></div>
-      <div class="row" style="margin-top:14px"><button class="ok grow" id="btnSubmit" disabled>제출하기</button></div>
+      <div class="row" style="margin-top:22px"><button class="ok" id="btnSubmit" disabled>제출하기</button></div>
     </div>
 
     <div class="card">
       <h2>직업 찾기</h2>
-      <p class="muted" style="margin-top:0">직업 이름을 검색하거나, 아래에서 좋아하는 것을 눌러 보세요. 카드를 누르면 그 직업이 하는 일을 바로 볼 수 있어요.</p>
-      <div class="row">
-        <input id="inSearch" type="text" class="grow" placeholder="예: 경찰, 수의사, 유튜버, 프로그래머" autocomplete="off" style="flex:1;min-width:200px">
-        <button class="primary" id="btnSearch">검색</button>
+      <p class="muted">직업 이름을 검색하거나 좋아하는 것을 눌러 보세요. 직업을 누르면 하는 일을 바로 볼 수 있어요.</p>
+      <div class="search">
+        <input id="inSearch" type="text" placeholder="경찰, 수의사, 유튜버…" autocomplete="off" aria-label="직업 이름 검색">
+        <button class="primary" id="btnSearch">찾기</button>
       </div>
-      <h3>🙂 나는 이런 걸 좋아해요</h3>
+      <h3>내가 좋아하는 것</h3>
       <div class="chips" id="chips"></div>
-      <h3>📂 직업군으로 둘러보기</h3>
-      <select id="selGroup"><option value="">직업군을 골라 보세요</option></select>
-      <div id="resInfo" class="muted" style="margin-top:14px"></div>
+      <h3>직업군에서 고르기</h3>
+      <select id="selGroup" aria-label="직업군"><option value="">직업군을 골라 보세요</option></select>
+      <div id="resInfo"></div>
       <div class="jobs" id="results"></div>
-      <div class="center" style="margin-top:12px"><button class="small hidden" id="btnMore">더 보기</button></div>
+      <button class="small hidden" id="btnMore">더 보기</button>
 
       <div class="none-zone">
-        <button id="btnNone">희망 직업이 정말 하나도 없어요</button>
+        <button id="btnNone">되고 싶은 직업이 정말 하나도 없어요</button>
         <div class="hint" id="noneHint"></div>
       </div>
     </div>
   </section>
 
-  <!-- ③ 제출 완료 -->
+  <!-- 제출 완료 -->
   <section id="scrDone" class="hidden">
-    <div class="card center">
-      <div style="font-size:3rem">🎉</div>
-      <h2>제출했어요!</h2>
-      <div id="doneBody" style="font-size:1.1rem"></div>
-      <p class="muted">바꾸고 싶으면 선생님께 말해 주세요. 선생님이 허락하면 다시 고를 수 있어요.</p>
+    <div class="card">
+      <h2 style="font-size:2rem">제출했어요.</h2>
+      <div id="doneBody"></div>
+      <p class="muted" style="margin-top:22px">바꾸고 싶으면 선생님께 말해 주세요. 선생님이 허락하면 다시 고를 수 있어요.</p>
       <button class="ghost" id="btnHome">처음 화면으로</button>
     </div>
   </section>
 
-  <!-- ④ 교사 로그인 -->
+  <!-- 교사 로그인 -->
   <section id="scrTLogin" class="hidden">
     <div class="card">
       <h2>선생님 모드</h2>
       <label for="inPw">교사 비밀번호</label>
       <input id="inPw" type="password" autocomplete="off">
       <div id="tLoginMsg"></div>
-      <div class="row" style="margin-top:16px">
+      <div class="row" style="margin-top:30px">
+        <button class="primary" id="btnTLogin">들어가기</button>
         <button class="ghost" id="btnTBack">돌아가기</button>
-        <button class="primary grow" id="btnTLogin">들어가기</button>
       </div>
     </div>
   </section>
 
-  <!-- ⑤ 교사 화면 -->
+  <!-- 교사 화면 -->
   <section id="scrTeacher" class="hidden">
-    <div class="card">
-      <div class="row"><h2 class="grow" style="margin:0">제출 현황</h2>
-        <button class="small" id="btnTRefresh">새로고침</button>
-        <button class="small ghost" id="btnTOut">나가기</button></div>
-      <div class="stats" style="margin-top:14px">
-        <div class="stat"><span class="muted">전체</span><b id="stAll">0</b></div>
-        <div class="stat"><span class="muted">직업 제출</span><b id="stOk" style="color:var(--ok)">0</b></div>
-        <div class="stat"><span class="muted">없음</span><b id="stNone" style="color:var(--warn)">0</b></div>
-        <div class="stat"><span class="muted">미제출</span><b id="stNo" style="color:var(--bad)">0</b></div>
-      </div>
+    <div class="card" style="margin-bottom:40px">
+      <p class="tally"><b id="stAll">0</b>명 가운데 <b class="n-ok" id="stOk">0</b>명 제출, <b class="n-none" id="stNone">0</b>명 없음, <b class="n-no" id="stNo">0</b>명 아직.</p>
       <div id="tMsg"></div>
-      <div class="row" style="margin-top:14px">
+      <div class="row">
+        <button class="small" id="btnTRefresh">새로고침</button>
         <button class="small" id="btnTOpen">조사 닫기</button>
         <button class="small" id="btnTSync">직업 목록 새로 받기</button>
-        <span class="muted" id="tJobs" style="font-size:.9rem"></span>
+        <button class="small" id="btnCopyNum">생기부용 복사 (번호만)</button>
+        <button class="small ghost" id="btnCopyAll">이름 포함 복사</button>
+        <button class="small ghost" id="btnTOut">나가기</button>
       </div>
-      <div class="row" style="margin-top:10px">
-        <button class="small" id="btnCopyNum">생기부용 복사 (번호만, 이름 없음)</button>
-        <button class="small ghost" id="btnCopyAll">전체 복사 (이름 포함)</button>
-      </div>
+      <p class="muted" id="tJobs" style="font-size:.85rem;margin-top:6px"></p>
     </div>
-    <div class="card">
-      <div class="row" style="margin-bottom:10px">
-        <button class="small chip on" data-f="all">전체</button>
-        <button class="small chip" data-f="미제출">미제출</button>
-        <button class="small chip" data-f="없음">없음</button>
-        <button class="small chip" data-f="제출">제출</button>
-      </div>
-      <div class="tw"><table>
-        <thead><tr><th>학번</th><th>이름</th><th>상태</th><th>1순위</th><th>2순위</th><th>까닭</th><th>살펴본 수</th><th>제출 시각</th><th></th></tr></thead>
-        <tbody id="tBody"></tbody>
-      </table></div>
+    <div class="filters">
+      <button class="small chip on" data-f="all">전체</button>
+      <button class="small chip" data-f="미제출">아직</button>
+      <button class="small chip" data-f="없음">없음</button>
+      <button class="small chip" data-f="제출">제출</button>
     </div>
+    <div class="tw"><table>
+      <thead><tr><th>학번</th><th>이름</th><th>상태</th><th>1순위</th><th>2순위</th><th>까닭</th><th>살펴본 수</th><th>제출 시각</th><th></th></tr></thead>
+      <tbody id="tBody"></tbody>
+    </table></div>
   </section>
 </main>
 
-<div class="modal hidden" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="modal hidden" id="modal" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
 
 <footer>
-  직업 정보 출처: 커리어넷 직업백과(한국직업능력연구원) · 자세한 내용은 커리어넷에서 확인하세요.<br>
-  입력한 내용은 담임 선생님만 볼 수 있어요.
+  직업 정보 출처: 커리어넷 직업백과(한국직업능력연구원). 자세한 내용은 커리어넷에서 확인하세요.<br>
+  적은 내용은 담임 선생님만 볼 수 있어요.
 </footer>
 
 <script>
@@ -250,28 +270,28 @@ const CAREER_URL = seq => 'https://www.career.go.kr/cloud/m/job/view?seq=' + enc
 
 /* ---------- 관심 분야 & 비슷한 말 ---------- */
 const INTERESTS = [
-  ['🐶 동물', ['동물','수의','사육','반려','애완','조련']],
-  ['🎮 게임', ['게임']],
-  ['⚽ 운동·스포츠', ['운동','스포츠','선수','체육','트레이너','심판']],
-  ['🍳 요리·음식', ['요리','조리','제과','제빵','음식','식품','바리스타','셰프']],
-  ['🎨 그림·디자인', ['디자인','디자이너','만화','웹툰','일러스트','미술','화가','캐릭터']],
-  ['🎵 음악', ['음악','가수','작곡','연주','악기','음향']],
-  ['🎬 영상·방송', ['영상','방송','영화','크리에이터','미디어','PD','연출','배우','아나운서']],
-  ['💻 컴퓨터·AI', ['소프트웨어','프로그래머','인공지능','데이터','정보보안','웹','앱','컴퓨터','네트워크']],
-  ['🔬 과학·연구', ['연구원','과학','생명','화학','물리','천문','실험']],
-  ['🏥 병원·건강', ['의사','간호','약사','치료','의료','한의사','치과','보건']],
-  ['🤝 사람 돕기·상담', ['상담','복지','사회복지','돌봄','보육','심리']],
-  ['🏫 가르치기', ['교사','교육','강사','교수']],
-  ['🚓 안전 지키기', ['경찰','소방','군인','경호','안전','보안','해양경찰']],
-  ['⚖️ 법·정의', ['변호사','판사','검사','법무','법률']],
-  ['🔧 만들기·기계', ['기계','로봇','자동차','엔지니어','기술자','정비','전기','전자']],
-  ['🏗️ 건축·공간', ['건축','인테리어','도시','토목','조경']],
-  ['✈️ 여행·외국어', ['여행','항공','승무원','조종사','통역','번역','외국어','관광','호텔']],
-  ['💄 뷰티·패션', ['미용','패션','메이크업','헤어','네일','피부','의상','모델']],
-  ['💰 돈·회사 운영', ['경영','금융','회계','마케팅','창업','투자','은행','세무']],
-  ['🌱 자연·환경', ['환경','농업','식물','기상','해양','산림','에너지']],
-  ['✍️ 글쓰기·책', ['작가','기자','편집','출판','카피라이터','시나리오']],
-  ['🗂️ 공무원·행정', ['공무원','행정','외교관','정치']]
+  ['동물', ['동물','수의','사육','반려','애완','조련']],
+  ['게임', ['게임']],
+  ['운동·스포츠', ['운동','스포츠','선수','체육','트레이너','심판']],
+  ['요리·음식', ['요리','조리','제과','제빵','음식','식품','바리스타','셰프']],
+  ['그림·디자인', ['디자인','디자이너','만화','웹툰','일러스트','미술','화가','캐릭터']],
+  ['음악', ['음악','가수','작곡','연주','악기','음향']],
+  ['영상·방송', ['영상','방송','영화','크리에이터','미디어','PD','연출','배우','아나운서']],
+  ['컴퓨터·AI', ['소프트웨어','프로그래머','인공지능','데이터','정보보안','웹','앱','컴퓨터','네트워크']],
+  ['과학·연구', ['연구원','과학','생명','화학','물리','천문','실험']],
+  ['병원·건강', ['의사','간호','약사','치료','의료','한의사','치과','보건']],
+  ['사람 돕기·상담', ['상담','복지','사회복지','돌봄','보육','심리']],
+  ['가르치기', ['교사','교육','강사','교수']],
+  ['안전 지키기', ['경찰','소방','군인','경호','안전','보안','해양경찰']],
+  ['법·정의', ['변호사','판사','검사','법무','법률']],
+  ['만들기·기계', ['기계','로봇','자동차','엔지니어','기술자','정비','전기','전자']],
+  ['건축·공간', ['건축','인테리어','도시','토목','조경']],
+  ['여행·외국어', ['여행','항공','승무원','조종사','통역','번역','외국어','관광','호텔']],
+  ['뷰티·패션', ['미용','패션','메이크업','헤어','네일','피부','의상','모델']],
+  ['돈·회사 운영', ['경영','금융','회계','마케팅','창업','투자','은행','세무']],
+  ['자연·환경', ['환경','농업','식물','기상','해양','산림','에너지']],
+  ['글쓰기·책', ['작가','기자','편집','출판','카피라이터','시나리오']],
+  ['공무원·행정', ['공무원','행정','외교관','정치']]
 ];
 const SYN = {
   '유튜버':['크리에이터','1인미디어','미디어콘텐츠','유튜브','방송'],
@@ -309,7 +329,7 @@ const SYN = {
 /* ---------- 공통 ---------- */
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 const norm = s => String(s || '').toLowerCase().replace(/[\s·.,()\-_/~!?]/g, '');
-function show(id){ ['scrLogin','scrPick','scrDone','scrTLogin','scrTeacher'].forEach(x => $(x).classList.toggle('hidden', x !== id)); window.scrollTo(0,0); }
+function show(id){ document.body.classList.toggle('wide', id === 'scrTeacher'); ['scrLogin','scrPick','scrDone','scrTLogin','scrTeacher'].forEach(x => $(x).classList.toggle('hidden', x !== id)); window.scrollTo(0,0); }
 function msg(el, text, kind){ $(el).innerHTML = text ? '<div class="msg ' + (kind || 'err') + '">' + esc(text) + '</div>' : ''; }
 function busy(btn, on, label){
   if (on){ btn.dataset.label = btn.textContent; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>' + esc(label || '잠깐만요…'); }
@@ -400,8 +420,8 @@ function cardHtml(j){
   return '<button class="job' + (picked ? ' picked' : '') + '" data-c="' + esc(j.c) + '">' +
     '<span class="nm">' + esc(j.n) + '</span>' +
     (j.g ? '<span class="gp">' + esc(j.g) + '</span>' : '') +
-    '<span class="wk">' + esc(j.w || '설명을 보려면 눌러 보세요.') + '</span>' +
-    (S.explored.has(j.c) ? '<span class="seen">✔ 설명 봤어요</span>' : '<span class="muted" style="font-size:.85rem">👉 눌러서 하는 일 보기</span>') +
+    (S.explored.has(j.c) ? '<span class="seen">읽음</span>' : '') +
+    '<span class="wk">' + esc(j.w || '눌러서 하는 일을 확인해 보세요.') + '</span>' +
     '</button>';
 }
 function refreshCards(){ document.querySelectorAll('.job').forEach(b => { const j = S.byCode[b.dataset.c]; if (j) b.outerHTML = cardHtml(j); }); }
@@ -413,9 +433,9 @@ async function doSearch(){
   if (!q){ setResults([], '검색어를 넣어 주세요.'); return; }
   try { await loadJobs(); } catch(e){ setResults([], '<div class="msg err">' + esc(e.message) + '</div>'); return; }
   const list = scoreJobs(expandTerms(q));
-  if (list.length){ setResults(list, '‘' + esc(q) + '’ 검색 결과 ' + list.length + '개 — 카드를 눌러 하는 일을 확인하세요.'); return; }
+  if (list.length){ setResults(list, '‘' + esc(q) + '’ 검색 결과 ' + list.length + '개. 직업을 누르면 하는 일이 보여요.'); return; }
   const sim = similar(q);
-  setResults(sim, '<div class="msg info">직업백과에 ‘' + esc(q) + '’(이)라는 이름은 없어요. 하지만 비슷한 직업이 있을 수 있어요! ' +
+  setResults(sim, '<div class="msg info" style="margin:0">직업백과에 ‘' + esc(q) + '’(이)라는 이름은 없어요. 하지만 비슷한 직업이 있을 수 있어요! ' +
     (sim.length ? '아래 비슷한 직업을 살펴보거나, ' : '') + '더 짧게(예: ‘축구선수’ → ‘선수’) 검색하거나, 좋아하는 것을 눌러 보세요.</div>');
 }
 
@@ -428,7 +448,7 @@ function chipSearch(idx, el){
   el.classList.add('on');
   loadJobs().then(() => {
     const list = scoreJobs(words.map(w => ({t:norm(w), w:1})));
-    setResults(list, esc(label) + ' 관련 직업 ' + list.length + '개 — 눌러서 하는 일을 확인해 보세요.');
+    setResults(list, esc(label) + ' 관련 직업 ' + list.length + '개');
   }).catch(e => setResults([], '<div class="msg err">' + esc(e.message) + '</div>'));
 }
 
@@ -452,15 +472,15 @@ function openJob(code){
   S.explored.add(code); updateNone();
   const isP1 = S.pick[1] && S.pick[1].c === code, isP2 = S.pick[2] && S.pick[2].c === code;
   openModal(
-    '<h2 style="margin-bottom:6px">' + esc(j.n) + '</h2>' + (j.g ? '<span class="gp">' + esc(j.g) + '</span>' : '') +
-    secText('💼 하는 일', j.w) +
-    (j.r ? secText('🔗 관련 직업', j.r) : '') +
-    '<div id="detailBox"><p class="muted"><span class="spin"></span>더 자세한 설명을 불러오는 중…</p></div>' +
-    '<a class="link" href="' + CAREER_URL(code) + '" target="_blank" rel="noopener noreferrer">커리어넷에서 전체 설명 보기 ↗</a>' +
+    '<button class="close" data-act="close">닫기</button>' +
+    '<span class="gp">' + esc(j.g || '') + '</span><h2>' + esc(j.n) + '</h2>' +
+    secText('하는 일', j.w) +
+    (j.r ? secText('관련 직업', j.r) : '') +
+    '<div id="detailBox"><p class="muted" style="margin-top:28px"><span class="spin"></span>자세한 설명을 불러오는 중</p></div>' +
+    '<a class="link" href="' + CAREER_URL(code) + '" target="_blank" rel="noopener noreferrer">커리어넷에서 전체 설명 보기</a>' +
     '<div class="actions">' +
-      '<button class="primary" data-act="p1">' + (isP1 ? '✔ 1순위로 골랐어요' : '1순위로 고르기') + '</button>' +
-      '<button data-act="p2">' + (isP2 ? '✔ 2순위로 골랐어요' : '2순위로 고르기') + '</button>' +
-      '<button class="ghost" data-act="close">닫기</button>' +
+      '<button class="primary" data-act="p1">' + (isP1 ? '1순위로 골랐어요' : '1순위로 고르기') + '</button>' +
+      '<button data-act="p2">' + (isP2 ? '2순위로 골랐어요' : '2순위로 고르기') + '</button>' +
     '</div>'
   );
   $('sheet').querySelectorAll('[data-act]').forEach(b => b.onclick = () => {
@@ -472,13 +492,13 @@ function openJob(code){
     const d = r.detail, box = $('detailBox'); if (!box) return;
     if (!d){ box.innerHTML = ''; return; }
     box.innerHTML =
-      secList('📋 하는 일 자세히', d.work) +
-      secList('✨ 이런 적성이 필요해요', d.aptitude) +
-      secList('💡 이런 흥미가 있으면 좋아요', d.interest) +
-      (d.ability && d.ability.length ? secText('🧠 핵심 능력', d.ability.join(', ')) : '') +
-      (d.departs && d.departs.length ? secText('🎓 관련 학과', d.departs.join(', ')) : '') +
-      (d.certis && d.certis.length ? secText('📜 관련 자격', d.certis.join(', ')) : '') +
-      secText('🔭 앞으로의 전망', d.forecast);
+      secList('하는 일 자세히', d.work) +
+      secList('이런 적성이 필요해요', d.aptitude) +
+      secList('이런 것에 흥미가 있으면 좋아요', d.interest) +
+      (d.ability && d.ability.length ? secText('핵심 능력', d.ability.join(', ')) : '') +
+      (d.departs && d.departs.length ? secText('관련 학과', d.departs.join(', ')) : '') +
+      (d.certis && d.certis.length ? secText('관련 자격', d.certis.join(', ')) : '') +
+      secText('앞으로의 전망', d.forecast);
   }).catch(() => { const box = $('detailBox'); if (box) box.innerHTML = '<p class="muted">자세한 설명은 아래 커리어넷 링크에서 볼 수 있어요.</p>'; });
   refreshCards();
 }
@@ -494,11 +514,13 @@ function renderSlots(){
   [1,2].forEach(n => {
     const el = $('slot' + n), j = S.pick[n];
     el.classList.toggle('filled', !!j);
-    el.innerHTML = '<div class="tag">' + n + '순위' + (n === 2 ? ' (선택)' : ' (꼭 골라요)') + '</div>' +
-      (j ? '<div class="nm">' + esc(j.n) + '</div><div class="gp">' + esc(j.g || '') + '</div>' +
-           '<div class="row" style="margin-top:8px"><button class="small" data-see="' + esc(j.c) + '">설명 다시 보기</button><button class="small ghost" data-del="' + n + '">빼기</button></div>'
-         : '<div class="muted" style="margin-top:6px">아래에서 직업을 찾아 카드를 누른 뒤 ‘' + n + '순위로 고르기’를 누르세요.</div>');
+    el.textContent = j ? j.n : '\u3000';
   });
+  const tools = [];
+  [1,2].forEach(n => { const j = S.pick[n]; if (j) tools.push(
+    '<button data-see="' + esc(j.c) + '">' + esc(j.n) + ' 설명 다시 보기</button><button data-del="' + n + '">' + n + '순위 지우기</button>'); });
+  $('slotTools').innerHTML = tools.length ? '<div class="row" style="gap:0 22px">' + tools.join('') + '</div>'
+    : '<p>아래에서 직업을 찾아 누른 뒤 “1순위로 고르기”를 누르면 빈칸이 채워져요. 2순위는 비워 둬도 돼요.</p>';
   $('btnSubmit').disabled = !S.pick[1];
   document.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { S.pick[+b.dataset.del] = null; if (!S.pick[1] && S.pick[2]){ S.pick[1] = S.pick[2]; S.pick[2] = null; } renderSlots(); refreshCards(); updateNone(); msg('pickMsg',''); });
   document.querySelectorAll('[data-see]').forEach(b => b.onclick = () => openJob(b.dataset.see));
@@ -514,25 +536,24 @@ function updateNone(){
 /* ---------- 제출 ---------- */
 function confirmSubmit(){
   if (!S.pick[1]) return;
-  const p1 = S.pick[1], p2 = S.pick[2];
+  const p1 = S.pick[1], p2 = S.pick[2], why = $('inReason').value.trim();
   openModal('<h2>이대로 제출할까요?</h2>' +
-    '<div class="sec"><b>1순위</b>' + esc(p1.n) + ' <span class="muted">(' + esc(p1.g || '') + ')</span></div>' +
-    '<div class="sec"><b>2순위</b>' + (p2 ? esc(p2.n) + ' <span class="muted">(' + esc(p2.g || '') + ')</span>' : '<span class="muted">없음(선택 안 함)</span>') + '</div>' +
-    (($('inReason').value.trim()) ? '<div class="sec"><b>고른 까닭</b>' + esc($('inReason').value.trim()) + '</div>' : '') +
-    '<p class="msg info">제출하면 선생님 허락 없이는 바꿀 수 없어요.</p>' +
-    '<div class="actions"><button class="ghost" data-act="no">다시 볼래요</button><button class="ok" data-act="yes">제출하기</button></div>');
+    '<p class="sentence" style="font-size:1.6rem">가장 되고 싶은 직업은 <span class="blank filled">' + esc(p1.n) + '</span>' +
+    (p2 ? ',<br>그다음으로는 <span class="blank filled">' + esc(p2.n) + '</span>' : '') + '.</p>' +
+    (why ? '<div class="sec"><b>고른 까닭</b>' + esc(why) + '</div>' : '') +
+    '<p class="note">제출하면 선생님 허락 없이는 바꿀 수 없어요.</p>' +
+    '<div class="actions"><button class="ok" data-act="yes">제출하기</button><button class="ghost" data-act="no">다시 볼래요</button></div>');
   $('sheet').querySelector('[data-act=no]').onclick = closeModal;
   $('sheet').querySelector('[data-act=yes]').onclick = e => sendSubmit(e.currentTarget, false);
 }
 function confirmNone(){
-  openModal('<div style="font-size:2.4rem">🤔</div><h2>잠깐만요!</h2>' +
-    '<p>꿈이 딱 정해지지 않아도 괜찮아요. <b>지금 조금이라도 궁금하거나 해 보고 싶은 직업</b>을 고르면 돼요.</p>' +
-    '<p>지금 고른 직업은 ‘지금의 관심’이에요. 앞으로 얼마든지 바뀔 수 있어요.</p>' +
-    '<div class="sec"><b>이렇게 찾아보세요</b><ul><li>내가 좋아하는 것(게임, 동물, 그림, 운동…)을 눌러 보기</li><li>내가 잘하는 과목과 관련된 직업 찾아보기</li><li>부모님이나 주변 어른의 직업 검색해 보기</li></ul></div>' +
-    '<div class="actions"><button class="primary" data-act="back">다시 찾아볼게요</button></div>' +
-    '<details style="margin-top:14px"><summary class="muted" style="cursor:pointer;font-size:.9rem">그래도 정말 없어요</summary>' +
-    '<label style="font-weight:400;display:flex;gap:8px;align-items:flex-start;margin-top:10px"><input type="checkbox" id="chkNone" style="width:26px;height:26px;flex:none">직업 설명을 여러 개 살펴봤지만 지금은 고를 수 있는 직업이 없어요.</label>' +
-    '<button class="ghost small" id="btnNoneGo" disabled style="margin-top:8px">‘없음’으로 제출</button></details>');
+  openModal('<h2>잠깐만요.</h2>' +
+    '<p style="font-size:1.2rem;margin-top:14px;max-width:30em">꿈이 딱 정해지지 않아도 괜찮아요. 지금 조금이라도 궁금하거나 해 보고 싶은 직업을 고르면 돼요. 지금 고른 직업은 지금의 관심일 뿐이고, 앞으로 얼마든지 바뀔 수 있어요.</p>' +
+    '<div class="sec"><b>이렇게 찾아보세요</b><ul><li>좋아하는 것(게임, 동물, 그림, 운동 등)을 눌러 보기</li><li>잘하는 과목과 관련된 직업 찾아보기</li><li>가족이나 주변 어른의 직업 검색해 보기</li></ul></div>' +
+    '<div class="row" style="margin-top:26px"><button class="primary" data-act="back">다시 찾아볼게요</button></div>' +
+    '<details><summary>그래도 정말 없어요</summary>' +
+    '<label class="check"><input type="checkbox" id="chkNone">직업 설명을 여러 개 살펴봤지만 지금은 고를 수 있는 직업이 없어요.</label>' +
+    '<button class="ghost small" id="btnNoneGo" disabled>‘없음’으로 제출</button></details>');
   $('sheet').querySelector('[data-act=back]').onclick = () => { closeModal(); $('chips').scrollIntoView({behavior:'smooth', block:'center'}); };
   $('chkNone').onchange = e => { $('btnNoneGo').disabled = !e.target.checked; };
   $('btnNoneGo').onclick = e => sendSubmit(e.currentTarget, true);
@@ -551,8 +572,9 @@ async function sendSubmit(btn, none){
 function showDone(r){
   const m = r.mine || {};
   $('doneBody').innerHTML = m.status === '없음'
-    ? '<p>희망 직업: <b>없음</b></p><p class="muted">선생님과 함께 이야기해 봐요.</p>'
-    : '<p>1순위: <b>' + esc(m.job1) + '</b>' + (m.job2 ? '<br>2순위: <b>' + esc(m.job2) + '</b>' : '') + '</p>';
+    ? '<p class="sentence" style="font-size:1.6rem">지금은 고른 직업이 없어요.</p><p class="muted">선생님과 함께 이야기해 봐요.</p>'
+    : '<p class="sentence" style="font-size:1.6rem">가장 되고 싶은 직업은 <span class="blank filled">' + esc(m.job1) + '</span>' +
+      (m.job2 ? ',<br>그다음으로는 <span class="blank filled">' + esc(m.job2) + '</span>' : '') + '.</p>';
   show('scrDone');
 }
 
@@ -565,7 +587,7 @@ async function enter(){
   try {
     const r = await api('status', {sid, name});
     S.me = {sid, name: r.name}; S.noneMin = r.noneMin || 5;
-    $('hWho').textContent = (CFG.CLASS_NAME ? CFG.CLASS_NAME + ' · ' : '') + sid + ' ' + r.name;
+    $('hWho').textContent = (CFG.CLASS_NAME ? CFG.CLASS_NAME + ' ' : '') + sid + ' ' + r.name;
     if (r.submitted && !r.canEdit){ busy(btn, false); return showDone(r); }
     if (!r.open){ busy(btn, false); return msg('loginMsg', '지금은 조사 기간이 아니에요. 선생님 안내를 기다려 주세요.', 'info'); }
     await loadJobs();
@@ -609,14 +631,14 @@ function tRender(){
   $('stOk').textContent = L.filter(x => x.status === '제출').length;
   $('stNone').textContent = L.filter(x => x.status === '없음').length;
   $('stNo').textContent = L.filter(x => x.status === '미제출').length;
-  $('btnTOpen').textContent = d.open ? '조사 닫기 (지금 열림)' : '조사 열기 (지금 닫힘)';
-  $('tJobs').textContent = d.jobsCount ? '직업 ' + d.jobsCount + '개 · ' + (d.jobsUpdated || '') + ' 받음' : (d.hasKey ? '직업 목록이 비어 있어요. 새로 받기를 눌러 주세요.' : '커리어넷 인증키가 없어요(시트 메뉴 ②).');
+  $('btnTOpen').textContent = d.open ? '조사 닫기 (지금 열려 있음)' : '조사 열기 (지금 닫혀 있음)';
+  $('tJobs').textContent = d.jobsCount ? '커리어넷 직업 ' + d.jobsCount + '개 (' + (d.jobsUpdated || '') + ' 받음)' : (d.hasKey ? '직업 목록이 비어 있어요. 새로 받기를 눌러 주세요.' : '커리어넷 인증키가 없어요(시트 메뉴 ②).');
   const rows = L.filter(x => S.tFilter === 'all' || x.status === S.tFilter);
   $('tBody').innerHTML = rows.map(x => {
     const b = x.status === '제출' ? 'b-ok' : x.status === '없음' ? 'b-none' : 'b-no';
-    return '<tr><td>' + esc(x.sid) + '</td><td>' + esc(x.name) + '</td><td><span class="badge ' + b + '">' + esc(x.status) + '</span>' + (x.allow ? '<br><span class="muted" style="font-size:.8rem">다시 제출 허용됨</span>' : '') + '</td>' +
-      '<td>' + esc(x.job1) + (x.g1 ? '<br><span class="muted" style="font-size:.8rem">' + esc(x.g1) + '</span>' : '') + '</td>' +
-      '<td>' + esc(x.job2) + (x.g2 ? '<br><span class="muted" style="font-size:.8rem">' + esc(x.g2) + '</span>' : '') + '</td>' +
+    return '<tr><td>' + esc(x.sid) + '</td><td>' + esc(x.name) + '</td><td><span class="badge ' + b + '">' + esc(x.status) + '</span>' + (x.allow ? '<span class="sub">다시 제출 허용됨</span>' : '') + '</td>' +
+      '<td>' + esc(x.job1) + (x.g1 ? '<span class="sub">' + esc(x.g1) + '</span>' : '') + '</td>' +
+      '<td>' + esc(x.job2) + (x.g2 ? '<span class="sub">' + esc(x.g2) + '</span>' : '') + '</td>' +
       '<td class="wrap">' + esc(x.reason) + '</td><td>' + esc(x.explored) + '</td><td style="font-size:.8rem">' + esc(x.time) + '</td>' +
       '<td>' + (x.status !== '미제출' && !x.allow ? '<button class="small" data-allow="' + esc(x.sid) + '">다시 제출 허용</button>' : '') + '</td></tr>';
   }).join('') || '<tr><td colspan="9" class="muted">해당 학생이 없어요. 명단 시트를 확인해 주세요.</td></tr>';
@@ -643,7 +665,7 @@ function copyRows(withName){
 }
 
 /* ---------- 연결 ---------- */
-$('hTitle').textContent = (CFG.TITLE || '나의 진로희망 조사');
+$('hTitle').textContent = (CFG.TITLE || '나의 진로희망 조사'); $('hWho').textContent = CFG.CLASS_NAME || '';
 document.title = (CFG.CLASS_NAME ? CFG.CLASS_NAME + ' ' : '') + (CFG.TITLE || '진로희망 조사');
 $('chips').innerHTML = INTERESTS.map((x, i) => '<button class="chip" data-i="' + i + '">' + esc(x[0]) + '</button>').join('');
 $('chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) chipSearch(+b.dataset.i, b); });
@@ -657,13 +679,13 @@ $('inName').addEventListener('keydown', e => { if (e.key === 'Enter') enter(); }
 $('inSid').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5); });
 $('btnSubmit').onclick = confirmSubmit;
 $('btnNone').onclick = confirmNone;
-$('btnHome').onclick = () => { S.me = null; $('inSid').value = ''; $('inName').value = ''; $('hWho').textContent = ''; show('scrLogin'); };
+$('btnHome').onclick = () => { S.me = null; $('inSid').value = ''; $('inName').value = ''; $('hWho').textContent = CFG.CLASS_NAME || ''; show('scrLogin'); };
 $('btnTeacher').onclick = () => { msg('tLoginMsg',''); show('scrTLogin'); };
 $('btnTBack').onclick = () => show('scrLogin');
 $('btnTLogin').onclick = tLogin;
 $('inPw').addEventListener('keydown', e => { if (e.key === 'Enter') tLogin(); });
 $('btnTRefresh').onclick = e => tLoad('tList', null, e.currentTarget);
-$('btnTOut').onclick = () => { S.token = null; S.tData = null; $('tBody').innerHTML = ''; $('hWho').textContent = ''; show('scrLogin'); };
+$('btnTOut').onclick = () => { S.token = null; S.tData = null; $('tBody').innerHTML = ''; $('hWho').textContent = CFG.CLASS_NAME || ''; show('scrLogin'); };
 $('btnTOpen').onclick = e => tLoad('tOpen', {open: !(S.tData && S.tData.open)}, e.currentTarget);
 $('btnTSync').onclick = e => { if (confirm('커리어넷에서 직업 목록을 새로 받을까요? 1~2분 걸릴 수 있어요.')) tLoad('tSync', null, e.currentTarget); };
 $('btnCopyNum').onclick = () => copyRows(false);
